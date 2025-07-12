@@ -17,6 +17,12 @@ public interface receitasVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrograma(receitasParser.ProgramaContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link receitasParser#declaracoes_receitas}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link receitasParser#declaracao_receita}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

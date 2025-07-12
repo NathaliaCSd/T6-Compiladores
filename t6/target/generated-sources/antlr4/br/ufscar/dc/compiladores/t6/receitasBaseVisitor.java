@@ -25,6 +25,13 @@ public class receitasBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitDeclaracao_receita(receitasParser.Declaracao_receitaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

@@ -1,23 +1,20 @@
 grammar receitas;
 
-/*
- * =============================================
- * Regras do Parser (Estrutura da Linguagem)
- * =============================================
- * Estas regras definem a sintaxe da nossa
- * linguagem de receitas.
- */
-
 // A regra principal que representa todo o arquivo de entrada.
 // Espera uma declaração de receita seguida por uma de ingredientes.
 programa
-    : declaracao_receita declaracao_ingredientes EOF
+    : declaracoes_receitas declaracao_ingredientes EOF
+    ;
+
+//permite que a entrada de mais de 1 receita 
+declaracoes_receitas
+    : declaracao_receita+
     ;
 
 // Define a estrutura de uma declaração de receita.
 // Ex: "receita curry requer alho:3 un, gengibre:1 un"
 declaracao_receita
-    : RECEITA NOME REQUER lista_ingredientes
+    : RECEITA ID REQUER lista_ingredientes
     ;
 
 // Define a estrutura da declaração dos ingredientes disponíveis.
@@ -34,7 +31,7 @@ lista_ingredientes
 // Define um único ingrediente com nome, quantidade e unidade.
 // Ex: "alho:3 un"
 ingrediente
-    : NOME DOIS_PONTOS NUMERO unidade
+    : ID DOIS_PONTOS NUMERO unidade
     ;
 
 // Agrupa as possíveis unidades de medida.
@@ -43,15 +40,6 @@ unidade
     | G
     | ML
     ;
-
-
-/*
- * =============================================
- * Regras do Lexer (Componentes da Linguagem)
- * =============================================
- * Estas regras definem os "átomos" ou "tokens"
- * que compõem a linguagem.
- */
 
 // Palavras-chave da linguagem
 RECEITA         : 'receita';
@@ -64,13 +52,13 @@ G               : 'g';
 ML              : 'ml';
 
 // Componentes básicos
-NOME            : [a-z_]+;      // Nomes de receitas e ingredientes (letras minúsculas e underscore)
+ID            : [a-z_]+;      // Nomes de receitas e ingredientes (letras minúsculas e underscore)
 NUMERO          : [0-9]+;       // Quantidades inteiras
 DOIS_PONTOS     : ':';
 VIRGULA         : ',';
 
 // Ignora espaços em branco, tabulações e quebras de linha entre os tokens.
 WS              : [ \t\r\n]+ -> skip;
-
+COMENTARIO:'$' ~('\n'|'\r')* '\r'? '\n' -> skip;
 
 

@@ -29,6 +29,18 @@ public class receitasBaseListener implements receitasListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaracao_receita(receitasParser.Declaracao_receitaContext ctx) { }
 	/**
 	 * {@inheritDoc}

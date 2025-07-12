@@ -1,149 +1,55 @@
 package br.ufscar.dc.compiladores.t6;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+/**
+ * Guarda nomes de ingredientes e receitas, permitindo consultas por tipo.
+ */
 public class TabelaDeSimbolos {
-      public enum TipoReceitas {
-        LITERAL,
-        INTEIRO,
-        ML,
-        UN,
-        G,
-        INVALIDO
-    }
-
     public enum TipoEntrada {
-        VARIAVEL,
-        TIPO,
-        REQUER
+        INGREDIENTE,
+        RECEITA
     }
 
-    public class EntradaTabelaDeSimbolos {
-        String nome;
-        TipoEntrada tipoEntrada;
-        TipoReceitas tipo;
-        boolean ehPonteiro;
-        boolean ehVetor;
-        boolean ehVar;
-        TabelaDeSimbolos registro;
-        List<EntradaTabelaDeSimbolos> parametros;
-        Object valor; // Para constantes
+    // Mapeia nome -> tipo (ingrediente ou receita)
+    private final Map<String, TipoEntrada> tabela = new HashMap<>();
 
-        // Construtor principal para constantes
-        public EntradaTabelaDeSimbolos(String nome, TipoEntrada tipoEntrada, TipoT5 tipo, Object valor) {
-            this.nome = nome;
-            this.tipoEntrada = tipoEntrada;
-            this.tipo = tipo;
-            this.valor = valor;
-            this.ehPonteiro = false;
-            this.ehVetor = false;
-            this.ehVar = false;
-            this.registro = null;
-            this.parametros = new ArrayList<>();
-        }
-
-        // Construtor para Variáveis/Parâmetros
-        public EntradaTabelaDeSimbolos(String nome, TipoEntrada tipoEntrada, TipoT5 tipo, boolean ehPonteiro,
-                TabelaDeSimbolos registro, boolean ehVetor, boolean ehVar) {
-            this(nome, tipoEntrada, tipo, null);
-            this.ehPonteiro = ehPonteiro;
-            this.registro = registro;
-            this.ehVetor = ehVetor;
-            this.ehVar = ehVar;
-        }
-
-        // Construtor para Funções/Procedimentos
-        public EntradaTabelaDeSimbolos(String nome, TipoEntrada tipoEntrada, TipoT5 tipoRetorno) {
-            this(nome, tipoEntrada, tipoRetorno, null);
-        }
-
-        public TipoT5 getTipo() {
-            return this.tipo;
-        }
-
-        public boolean isPonteiro() {
-            return this.ehPonteiro;
-        }
-
-        public boolean isVetor() {
-            return this.ehVetor;
-        }
-
-        public boolean isVar() {
-            return this.ehVar;
-        }
-
-        public TabelaDeSimbolos getRegistro() {
-            return this.registro;
-        }
-
-        public TipoEntrada getTipoEntrada() {
-            return this.tipoEntrada;
-        }
-
-        public List<EntradaTabelaDeSimbolos> getParametros() {
-            return this.parametros;
-        }
-
-        public TipoT5 getTipoRetorno() {
-            return this.tipo;
-        }
+    /**
+     * Adiciona um ingrediente ao inventário.
+     */
+    public void adicionarIngrediente(String nome) {
+        tabela.put(nome, TipoEntrada.INGREDIENTE);
     }
 
-    private final Map<String, EntradaTabelaDeSimbolos> tabela;
-
-    public TabelaDeSimbolos() {
-        this.tabela = new HashMap<>();
+    /**
+     * Verifica se um ingrediente já está no inventário.
+     */
+    public boolean existeIngrediente(String nome) {
+        return tabela.get(nome) == TipoEntrada.INGREDIENTE;
     }
 
-    public void adicionar(String nome, TipoT5 tipo) {
-        adicionar(nome, 
-                TipoEntrada.VARIAVEL, 
-                tipo, 
-                false, 
-                null, 
-                false,
-                false); 
+    /**
+     * Adiciona uma receita ao conjunto de receitas.
+     */
+    public void adicionarReceita(String nome) {
+        tabela.put(nome, TipoEntrada.RECEITA);
     }
 
-    public void adicionar(String nome, TipoEntrada tipoEntrada, TipoT5 tipo, boolean ehPonteiro,
-            TabelaDeSimbolos registro, boolean ehVetor, boolean ehVar) {
-        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipoEntrada, tipo, ehPonteiro, registro, ehVetor, ehVar));
+    /**
+     * Verifica se uma receita já foi declarada.
+     */
+    public boolean existeReceita(String nome) {
+        return tabela.get(nome) == TipoEntrada.RECEITA;
     }
 
-    
-
-    public void adicionarConstante(String nome, TipoT5 tipo, Object valor) {
-        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, TipoEntrada.CONSTANTE, tipo, valor));
-    }
-
-    public void adicionarFuncao(String nome, TipoT5 tipoRetorno) {
-        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, TipoEntrada.FUNCAO, tipoRetorno));
-    }
-
-    public void adicionarProcedimento(String nome) {
-        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, TipoEntrada.PROCEDIMENTO, null));
-    }
-
-    public void adicionarParametro(String nomeSubRotina, EntradaTabelaDeSimbolos parametro) {
-        if (tabela.containsKey(nomeSubRotina)) {
-            tabela.get(nomeSubRotina).parametros.add(parametro);
-        }
-    }
-
-    public boolean existe(String nome) {
-        return tabela.containsKey(nome);
-    }
-
-    public EntradaTabelaDeSimbolos getEntrada(String nome) {
+    /**
+     * Retorna o tipo de entrada (ingrediente ou receita) ou null se não existir.
+     */
+    public TipoEntrada verificar(String nome) {
         return tabela.get(nome);
     }
 
-    public List<EntradaTabelaDeSimbolos> entradas() {
-        return new ArrayList<>(tabela.values());
+    public class TipoReceitas {
     }
-
 }

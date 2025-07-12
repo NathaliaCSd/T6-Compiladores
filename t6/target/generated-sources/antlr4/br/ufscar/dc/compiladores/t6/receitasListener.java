@@ -18,6 +18,16 @@ public interface receitasListener extends ParseTreeListener {
 	 */
 	void exitPrograma(receitasParser.ProgramaContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link receitasParser#declaracoes_receitas}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link receitasParser#declaracoes_receitas}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracoes_receitas(receitasParser.Declaracoes_receitasContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link receitasParser#declaracao_receita}.
 	 * @param ctx the parse tree
 	 */

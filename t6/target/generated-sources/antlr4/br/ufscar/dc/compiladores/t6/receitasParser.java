@@ -17,15 +17,16 @@ public class receitasParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		RECEITA=1, REQUER=2, INGREDIENTES=3, UN=4, G=5, ML=6, NOME=7, NUMERO=8, 
-		DOIS_PONTOS=9, VIRGULA=10, WS=11;
+		RECEITA=1, REQUER=2, INGREDIENTES=3, UN=4, G=5, ML=6, ID=7, NUMERO=8, 
+		DOIS_PONTOS=9, VIRGULA=10, WS=11, COMENTARIO=12;
 	public static final int
-		RULE_programa = 0, RULE_declaracao_receita = 1, RULE_declaracao_ingredientes = 2, 
-		RULE_lista_ingredientes = 3, RULE_ingrediente = 4, RULE_unidade = 5;
+		RULE_programa = 0, RULE_declaracoes_receitas = 1, RULE_declaracao_receita = 2, 
+		RULE_declaracao_ingredientes = 3, RULE_lista_ingredientes = 4, RULE_ingrediente = 5, 
+		RULE_unidade = 6;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"programa", "declaracao_receita", "declaracao_ingredientes", "lista_ingredientes", 
-			"ingrediente", "unidade"
+			"programa", "declaracoes_receitas", "declaracao_receita", "declaracao_ingredientes", 
+			"lista_ingredientes", "ingrediente", "unidade"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -39,8 +40,8 @@ public class receitasParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "RECEITA", "REQUER", "INGREDIENTES", "UN", "G", "ML", "NOME", "NUMERO", 
-			"DOIS_PONTOS", "VIRGULA", "WS"
+			null, "RECEITA", "REQUER", "INGREDIENTES", "UN", "G", "ML", "ID", "NUMERO", 
+			"DOIS_PONTOS", "VIRGULA", "WS", "COMENTARIO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -96,8 +97,8 @@ public class receitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramaContext extends ParserRuleContext {
-		public Declaracao_receitaContext declaracao_receita() {
-			return getRuleContext(Declaracao_receitaContext.class,0);
+		public Declaracoes_receitasContext declaracoes_receitas() {
+			return getRuleContext(Declaracoes_receitasContext.class,0);
 		}
 		public Declaracao_ingredientesContext declaracao_ingredientes() {
 			return getRuleContext(Declaracao_ingredientesContext.class,0);
@@ -128,12 +129,73 @@ public class receitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(12);
-			declaracao_receita();
-			setState(13);
-			declaracao_ingredientes();
 			setState(14);
+			declaracoes_receitas();
+			setState(15);
+			declaracao_ingredientes();
+			setState(16);
 			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Declaracoes_receitasContext extends ParserRuleContext {
+		public List<Declaracao_receitaContext> declaracao_receita() {
+			return getRuleContexts(Declaracao_receitaContext.class);
+		}
+		public Declaracao_receitaContext declaracao_receita(int i) {
+			return getRuleContext(Declaracao_receitaContext.class,i);
+		}
+		public Declaracoes_receitasContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_declaracoes_receitas; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof receitasListener ) ((receitasListener)listener).enterDeclaracoes_receitas(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof receitasListener ) ((receitasListener)listener).exitDeclaracoes_receitas(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof receitasVisitor ) return ((receitasVisitor<? extends T>)visitor).visitDeclaracoes_receitas(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Declaracoes_receitasContext declaracoes_receitas() throws RecognitionException {
+		Declaracoes_receitasContext _localctx = new Declaracoes_receitasContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_declaracoes_receitas);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(19); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(18);
+				declaracao_receita();
+				}
+				}
+				setState(21); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==RECEITA );
 			}
 		}
 		catch (RecognitionException re) {
@@ -150,7 +212,7 @@ public class receitasParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class Declaracao_receitaContext extends ParserRuleContext {
 		public TerminalNode RECEITA() { return getToken(receitasParser.RECEITA, 0); }
-		public TerminalNode NOME() { return getToken(receitasParser.NOME, 0); }
+		public TerminalNode ID() { return getToken(receitasParser.ID, 0); }
 		public TerminalNode REQUER() { return getToken(receitasParser.REQUER, 0); }
 		public Lista_ingredientesContext lista_ingredientes() {
 			return getRuleContext(Lista_ingredientesContext.class,0);
@@ -176,17 +238,17 @@ public class receitasParser extends Parser {
 
 	public final Declaracao_receitaContext declaracao_receita() throws RecognitionException {
 		Declaracao_receitaContext _localctx = new Declaracao_receitaContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_declaracao_receita);
+		enterRule(_localctx, 4, RULE_declaracao_receita);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(16);
+			setState(23);
 			match(RECEITA);
-			setState(17);
-			match(NOME);
-			setState(18);
+			setState(24);
+			match(ID);
+			setState(25);
 			match(REQUER);
-			setState(19);
+			setState(26);
 			lista_ingredientes();
 			}
 		}
@@ -228,13 +290,13 @@ public class receitasParser extends Parser {
 
 	public final Declaracao_ingredientesContext declaracao_ingredientes() throws RecognitionException {
 		Declaracao_ingredientesContext _localctx = new Declaracao_ingredientesContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_declaracao_ingredientes);
+		enterRule(_localctx, 6, RULE_declaracao_ingredientes);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(21);
+			setState(28);
 			match(INGREDIENTES);
-			setState(22);
+			setState(29);
 			lista_ingredientes();
 			}
 		}
@@ -282,26 +344,26 @@ public class receitasParser extends Parser {
 
 	public final Lista_ingredientesContext lista_ingredientes() throws RecognitionException {
 		Lista_ingredientesContext _localctx = new Lista_ingredientesContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_lista_ingredientes);
+		enterRule(_localctx, 8, RULE_lista_ingredientes);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(24);
+			setState(31);
 			ingrediente();
-			setState(29);
+			setState(36);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==VIRGULA) {
 				{
 				{
-				setState(25);
+				setState(32);
 				match(VIRGULA);
-				setState(26);
+				setState(33);
 				ingrediente();
 				}
 				}
-				setState(31);
+				setState(38);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -320,7 +382,7 @@ public class receitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IngredienteContext extends ParserRuleContext {
-		public TerminalNode NOME() { return getToken(receitasParser.NOME, 0); }
+		public TerminalNode ID() { return getToken(receitasParser.ID, 0); }
 		public TerminalNode DOIS_PONTOS() { return getToken(receitasParser.DOIS_PONTOS, 0); }
 		public TerminalNode NUMERO() { return getToken(receitasParser.NUMERO, 0); }
 		public UnidadeContext unidade() {
@@ -347,17 +409,17 @@ public class receitasParser extends Parser {
 
 	public final IngredienteContext ingrediente() throws RecognitionException {
 		IngredienteContext _localctx = new IngredienteContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_ingrediente);
+		enterRule(_localctx, 10, RULE_ingrediente);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
-			match(NOME);
-			setState(33);
+			setState(39);
+			match(ID);
+			setState(40);
 			match(DOIS_PONTOS);
-			setState(34);
+			setState(41);
 			match(NUMERO);
-			setState(35);
+			setState(42);
 			unidade();
 			}
 		}
@@ -398,12 +460,12 @@ public class receitasParser extends Parser {
 
 	public final UnidadeContext unidade() throws RecognitionException {
 		UnidadeContext _localctx = new UnidadeContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_unidade);
+		enterRule(_localctx, 12, RULE_unidade);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(37);
+			setState(44);
 			_la = _input.LA(1);
 			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 112L) != 0) ) {
 			_errHandler.recoverInline(this);
@@ -427,30 +489,34 @@ public class receitasParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000b(\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\f/\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
-		"\u0005\u0007\u0005\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0005\u0003\u001c"+
-		"\b\u0003\n\u0003\f\u0003\u001f\t\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0000\u0000"+
-		"\u0006\u0000\u0002\u0004\u0006\b\n\u0000\u0001\u0001\u0000\u0004\u0006"+
-		"\"\u0000\f\u0001\u0000\u0000\u0000\u0002\u0010\u0001\u0000\u0000\u0000"+
-		"\u0004\u0015\u0001\u0000\u0000\u0000\u0006\u0018\u0001\u0000\u0000\u0000"+
-		"\b \u0001\u0000\u0000\u0000\n%\u0001\u0000\u0000\u0000\f\r\u0003\u0002"+
-		"\u0001\u0000\r\u000e\u0003\u0004\u0002\u0000\u000e\u000f\u0005\u0000\u0000"+
-		"\u0001\u000f\u0001\u0001\u0000\u0000\u0000\u0010\u0011\u0005\u0001\u0000"+
-		"\u0000\u0011\u0012\u0005\u0007\u0000\u0000\u0012\u0013\u0005\u0002\u0000"+
-		"\u0000\u0013\u0014\u0003\u0006\u0003\u0000\u0014\u0003\u0001\u0000\u0000"+
-		"\u0000\u0015\u0016\u0005\u0003\u0000\u0000\u0016\u0017\u0003\u0006\u0003"+
-		"\u0000\u0017\u0005\u0001\u0000\u0000\u0000\u0018\u001d\u0003\b\u0004\u0000"+
-		"\u0019\u001a\u0005\n\u0000\u0000\u001a\u001c\u0003\b\u0004\u0000\u001b"+
-		"\u0019\u0001\u0000\u0000\u0000\u001c\u001f\u0001\u0000\u0000\u0000\u001d"+
-		"\u001b\u0001\u0000\u0000\u0000\u001d\u001e\u0001\u0000\u0000\u0000\u001e"+
-		"\u0007\u0001\u0000\u0000\u0000\u001f\u001d\u0001\u0000\u0000\u0000 !\u0005"+
-		"\u0007\u0000\u0000!\"\u0005\t\u0000\u0000\"#\u0005\b\u0000\u0000#$\u0003"+
-		"\n\u0005\u0000$\t\u0001\u0000\u0000\u0000%&\u0007\u0000\u0000\u0000&\u000b"+
-		"\u0001\u0000\u0000\u0000\u0001\u001d";
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0001\u0000\u0001"+
+		"\u0000\u0001\u0000\u0001\u0001\u0004\u0001\u0014\b\u0001\u000b\u0001\f"+
+		"\u0001\u0015\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004\u0001\u0004"+
+		"\u0005\u0004#\b\u0004\n\u0004\f\u0004&\t\u0004\u0001\u0005\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006"+
+		"\u0000\u0000\u0007\u0000\u0002\u0004\u0006\b\n\f\u0000\u0001\u0001\u0000"+
+		"\u0004\u0006)\u0000\u000e\u0001\u0000\u0000\u0000\u0002\u0013\u0001\u0000"+
+		"\u0000\u0000\u0004\u0017\u0001\u0000\u0000\u0000\u0006\u001c\u0001\u0000"+
+		"\u0000\u0000\b\u001f\u0001\u0000\u0000\u0000\n\'\u0001\u0000\u0000\u0000"+
+		"\f,\u0001\u0000\u0000\u0000\u000e\u000f\u0003\u0002\u0001\u0000\u000f"+
+		"\u0010\u0003\u0006\u0003\u0000\u0010\u0011\u0005\u0000\u0000\u0001\u0011"+
+		"\u0001\u0001\u0000\u0000\u0000\u0012\u0014\u0003\u0004\u0002\u0000\u0013"+
+		"\u0012\u0001\u0000\u0000\u0000\u0014\u0015\u0001\u0000\u0000\u0000\u0015"+
+		"\u0013\u0001\u0000\u0000\u0000\u0015\u0016\u0001\u0000\u0000\u0000\u0016"+
+		"\u0003\u0001\u0000\u0000\u0000\u0017\u0018\u0005\u0001\u0000\u0000\u0018"+
+		"\u0019\u0005\u0007\u0000\u0000\u0019\u001a\u0005\u0002\u0000\u0000\u001a"+
+		"\u001b\u0003\b\u0004\u0000\u001b\u0005\u0001\u0000\u0000\u0000\u001c\u001d"+
+		"\u0005\u0003\u0000\u0000\u001d\u001e\u0003\b\u0004\u0000\u001e\u0007\u0001"+
+		"\u0000\u0000\u0000\u001f$\u0003\n\u0005\u0000 !\u0005\n\u0000\u0000!#"+
+		"\u0003\n\u0005\u0000\" \u0001\u0000\u0000\u0000#&\u0001\u0000\u0000\u0000"+
+		"$\"\u0001\u0000\u0000\u0000$%\u0001\u0000\u0000\u0000%\t\u0001\u0000\u0000"+
+		"\u0000&$\u0001\u0000\u0000\u0000\'(\u0005\u0007\u0000\u0000()\u0005\t"+
+		"\u0000\u0000)*\u0005\b\u0000\u0000*+\u0003\f\u0006\u0000+\u000b\u0001"+
+		"\u0000\u0000\u0000,-\u0007\u0000\u0000\u0000-\r\u0001\u0000\u0000\u0000"+
+		"\u0002\u0015$";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
