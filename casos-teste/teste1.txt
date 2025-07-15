@@ -1,0 +1,10 @@
+receita omelete rendimento 2 porcoes tempo 10 min requer: ovo:2 un, sal:1 g
+receita bruschetta requer: tomate:2 un, alho:1 un
+
+ingredientes: alho:2 un, tomate:1 un, ovo:3 un, sal:5 g
+
+passos:
+- misture ovo, sal e bata bem
+- aqueça a frigideira e despeje a mistura
+- sirva quente
+

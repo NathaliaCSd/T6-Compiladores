@@ -37,18 +37,18 @@ public class Principal {
                 }
             });
 
-            ReceitasParser.ProgramaContext arvore = parser.programa();
-
             ReceitasSemantico sem = new ReceitasSemantico();
-            sem.visitPrograma(arvore);
             erros.addAll(ReceitasSemanticoUtils.getErrosSemanticos());
 
-            // se tiver algum erro, eh printado no arquivo
+            ReceitasParser.ProgramaContext arvore = parser.programa();
             if (!erros.isEmpty()) {
                 erros.forEach(pw::println);
                 pw.println("Fim da compilacao");
                 return;
             }
+            // só agora:
+            new ReceitasSemantico().visitPrograma(arvore);
+            sem.visitPrograma(arvore);
 
             ReceitasGeradorHTML ger = new ReceitasGeradorHTML();
             ger.visitPrograma(arvore);

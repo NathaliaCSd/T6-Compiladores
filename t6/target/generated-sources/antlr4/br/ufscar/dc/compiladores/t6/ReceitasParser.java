@@ -17,9 +17,9 @@ public class ReceitasParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, PASSO=5, RECEITA=6, REQUER=7, INGREDIENTES=8, 
-		RENDIMENTO=9, TEMPO=10, UN=11, G=12, ML=13, ID=14, NUMERO=15, DOIS_PONTOS=16, 
-		VIRGULA=17, EQUAL=18, WS=19, COMENTARIO=20;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, RECEITA=6, REQUER=7, INGREDIENTES=8, 
+		RENDIMENTO=9, TEMPO=10, UN=11, G=12, ML=13, NOME=14, NUMERO=15, DOIS_PONTOS=16, 
+		VIRGULA=17, EQUAL=18, TEXT=19, WS=20, COMENTARIO=21;
 	public static final int
 		RULE_programa = 0, RULE_declaracoes_receitas = 1, RULE_declaracao_receita = 2, 
 		RULE_declaracao_ingredientes = 3, RULE_declaracao_passos = 4, RULE_passo = 5, 
@@ -36,7 +36,7 @@ public class ReceitasParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'porcoes'", "'min'", "'passos:'", "'substituicoes:'", "'-'", "'receita'", 
+			null, "'porcoes'", "'min'", "'passos:'", "'-'", "'substituicoes:'", "'receita'", 
 			"'requer'", "'ingredientes'", "'rendimento'", "'tempo'", "'un'", "'g'", 
 			"'ml'", null, null, "':'", "','", "'='"
 		};
@@ -44,9 +44,9 @@ public class ReceitasParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, "PASSO", "RECEITA", "REQUER", "INGREDIENTES", 
-			"RENDIMENTO", "TEMPO", "UN", "G", "ML", "ID", "NUMERO", "DOIS_PONTOS", 
-			"VIRGULA", "EQUAL", "WS", "COMENTARIO"
+			null, null, null, null, null, null, "RECEITA", "REQUER", "INGREDIENTES", 
+			"RENDIMENTO", "TEMPO", "UN", "G", "ML", "NOME", "NUMERO", "DOIS_PONTOS", 
+			"VIRGULA", "EQUAL", "TEXT", "WS", "COMENTARIO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -150,7 +150,7 @@ public class ReceitasParser extends Parser {
 			setState(26);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==T__3) {
+			if (_la==T__4) {
 				{
 				setState(25);
 				substituicoes();
@@ -236,8 +236,9 @@ public class ReceitasParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class Declaracao_receitaContext extends ParserRuleContext {
 		public TerminalNode RECEITA() { return getToken(ReceitasParser.RECEITA, 0); }
-		public TerminalNode ID() { return getToken(ReceitasParser.ID, 0); }
+		public TerminalNode NOME() { return getToken(ReceitasParser.NOME, 0); }
 		public TerminalNode REQUER() { return getToken(ReceitasParser.REQUER, 0); }
+		public TerminalNode DOIS_PONTOS() { return getToken(ReceitasParser.DOIS_PONTOS, 0); }
 		public Lista_ingredientesContext lista_ingredientes() {
 			return getRuleContext(Lista_ingredientesContext.class,0);
 		}
@@ -276,7 +277,7 @@ public class ReceitasParser extends Parser {
 			setState(35);
 			match(RECEITA);
 			setState(36);
-			match(ID);
+			match(NOME);
 			setState(40);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -308,6 +309,8 @@ public class ReceitasParser extends Parser {
 			setState(47);
 			match(REQUER);
 			setState(48);
+			match(DOIS_PONTOS);
+			setState(49);
 			lista_ingredientes();
 			}
 		}
@@ -325,6 +328,7 @@ public class ReceitasParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class Declaracao_ingredientesContext extends ParserRuleContext {
 		public TerminalNode INGREDIENTES() { return getToken(ReceitasParser.INGREDIENTES, 0); }
+		public TerminalNode DOIS_PONTOS() { return getToken(ReceitasParser.DOIS_PONTOS, 0); }
 		public Lista_ingredientesContext lista_ingredientes() {
 			return getRuleContext(Lista_ingredientesContext.class,0);
 		}
@@ -353,9 +357,11 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
-			match(INGREDIENTES);
 			setState(51);
+			match(INGREDIENTES);
+			setState(52);
+			match(DOIS_PONTOS);
+			setState(53);
 			lista_ingredientes();
 			}
 		}
@@ -404,22 +410,22 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(55);
 			match(T__2);
-			setState(55); 
+			setState(57); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(54);
+				setState(56);
 				passo();
 				}
 				}
-				setState(57); 
+				setState(59); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==PASSO );
+			} while ( _la==T__3 );
 			}
 		}
 		catch (RecognitionException re) {
@@ -435,7 +441,7 @@ public class ReceitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class PassoContext extends ParserRuleContext {
-		public TerminalNode PASSO() { return getToken(ReceitasParser.PASSO, 0); }
+		public TerminalNode TEXT() { return getToken(ReceitasParser.TEXT, 0); }
 		public PassoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -461,8 +467,10 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(59);
-			match(PASSO);
+			setState(61);
+			match(T__3);
+			setState(62);
+			match(TEXT);
 			}
 		}
 		catch (RecognitionException re) {
@@ -514,21 +522,21 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(64);
 			ingrediente();
-			setState(66);
+			setState(69);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==VIRGULA) {
 				{
 				{
-				setState(62);
+				setState(65);
 				match(VIRGULA);
-				setState(63);
+				setState(66);
 				ingrediente();
 				}
 				}
-				setState(68);
+				setState(71);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -547,7 +555,7 @@ public class ReceitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IngredienteContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ReceitasParser.ID, 0); }
+		public TerminalNode NOME() { return getToken(ReceitasParser.NOME, 0); }
 		public TerminalNode DOIS_PONTOS() { return getToken(ReceitasParser.DOIS_PONTOS, 0); }
 		public TerminalNode NUMERO() { return getToken(ReceitasParser.NUMERO, 0); }
 		public UnidadeContext unidade() {
@@ -578,13 +586,13 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
-			match(ID);
-			setState(70);
-			match(DOIS_PONTOS);
-			setState(71);
-			match(NUMERO);
 			setState(72);
+			match(NOME);
+			setState(73);
+			match(DOIS_PONTOS);
+			setState(74);
+			match(NUMERO);
+			setState(75);
 			unidade();
 			}
 		}
@@ -630,7 +638,7 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(77);
 			_la = _input.LA(1);
 			if ( !(((_la) & ~0x3f) == 0 && ((1L << _la) & 14336L) != 0) ) {
 			_errHandler.recoverInline(this);
@@ -691,23 +699,23 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(76);
-			match(T__3);
-			setState(77);
+			setState(79);
+			match(T__4);
+			setState(80);
 			substituicao();
-			setState(82);
+			setState(85);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==VIRGULA) {
 				{
 				{
-				setState(78);
+				setState(81);
 				match(VIRGULA);
-				setState(79);
+				setState(82);
 				substituicao();
 				}
 				}
-				setState(84);
+				setState(87);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -726,9 +734,9 @@ public class ReceitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class SubstituicaoContext extends ParserRuleContext {
-		public List<TerminalNode> ID() { return getTokens(ReceitasParser.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(ReceitasParser.ID, i);
+		public List<TerminalNode> NOME() { return getTokens(ReceitasParser.NOME); }
+		public TerminalNode NOME(int i) {
+			return getToken(ReceitasParser.NOME, i);
 		}
 		public TerminalNode EQUAL() { return getToken(ReceitasParser.EQUAL, 0); }
 		public SubstituicaoContext(ParserRuleContext parent, int invokingState) {
@@ -756,12 +764,12 @@ public class ReceitasParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
-			match(ID);
-			setState(86);
+			setState(88);
+			match(NOME);
+			setState(89);
 			match(EQUAL);
-			setState(87);
-			match(ID);
+			setState(90);
+			match(NOME);
 			}
 		}
 		catch (RecognitionException re) {
@@ -776,7 +784,7 @@ public class ReceitasParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0014Z\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0015]\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0001\u0000\u0001\u0000\u0001"+
@@ -784,47 +792,49 @@ public class ReceitasParser extends Parser {
 		"\u0001\u0004\u0001 \b\u0001\u000b\u0001\f\u0001!\u0001\u0002\u0001\u0002"+
 		"\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002)\b\u0002\u0001\u0002"+
 		"\u0001\u0002\u0001\u0002\u0003\u0002.\b\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004"+
-		"\u0004\u00048\b\u0004\u000b\u0004\f\u00049\u0001\u0005\u0001\u0005\u0001"+
-		"\u0006\u0001\u0006\u0001\u0006\u0005\u0006A\b\u0006\n\u0006\f\u0006D\t"+
-		"\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
-		"\b\u0001\b\u0001\t\u0001\t\u0001\t\u0001\t\u0005\tQ\b\t\n\t\f\tT\t\t\u0001"+
-		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0000\u0000\u000b\u0000\u0002\u0004"+
-		"\u0006\b\n\f\u000e\u0010\u0012\u0014\u0000\u0001\u0001\u0000\u000b\rU"+
-		"\u0000\u0016\u0001\u0000\u0000\u0000\u0002\u001f\u0001\u0000\u0000\u0000"+
-		"\u0004#\u0001\u0000\u0000\u0000\u00062\u0001\u0000\u0000\u0000\b5\u0001"+
-		"\u0000\u0000\u0000\n;\u0001\u0000\u0000\u0000\f=\u0001\u0000\u0000\u0000"+
-		"\u000eE\u0001\u0000\u0000\u0000\u0010J\u0001\u0000\u0000\u0000\u0012L"+
-		"\u0001\u0000\u0000\u0000\u0014U\u0001\u0000\u0000\u0000\u0016\u0017\u0003"+
-		"\u0002\u0001\u0000\u0017\u0018\u0003\u0006\u0003\u0000\u0018\u001a\u0003"+
-		"\b\u0004\u0000\u0019\u001b\u0003\u0012\t\u0000\u001a\u0019\u0001\u0000"+
-		"\u0000\u0000\u001a\u001b\u0001\u0000\u0000\u0000\u001b\u001c\u0001\u0000"+
-		"\u0000\u0000\u001c\u001d\u0005\u0000\u0000\u0001\u001d\u0001\u0001\u0000"+
-		"\u0000\u0000\u001e \u0003\u0004\u0002\u0000\u001f\u001e\u0001\u0000\u0000"+
-		"\u0000 !\u0001\u0000\u0000\u0000!\u001f\u0001\u0000\u0000\u0000!\"\u0001"+
-		"\u0000\u0000\u0000\"\u0003\u0001\u0000\u0000\u0000#$\u0005\u0006\u0000"+
-		"\u0000$(\u0005\u000e\u0000\u0000%&\u0005\t\u0000\u0000&\'\u0005\u000f"+
-		"\u0000\u0000\')\u0005\u0001\u0000\u0000(%\u0001\u0000\u0000\u0000()\u0001"+
-		"\u0000\u0000\u0000)-\u0001\u0000\u0000\u0000*+\u0005\n\u0000\u0000+,\u0005"+
-		"\u000f\u0000\u0000,.\u0005\u0002\u0000\u0000-*\u0001\u0000\u0000\u0000"+
-		"-.\u0001\u0000\u0000\u0000./\u0001\u0000\u0000\u0000/0\u0005\u0007\u0000"+
-		"\u000001\u0003\f\u0006\u00001\u0005\u0001\u0000\u0000\u000023\u0005\b"+
-		"\u0000\u000034\u0003\f\u0006\u00004\u0007\u0001\u0000\u0000\u000057\u0005"+
-		"\u0003\u0000\u000068\u0003\n\u0005\u000076\u0001\u0000\u0000\u000089\u0001"+
-		"\u0000\u0000\u000097\u0001\u0000\u0000\u00009:\u0001\u0000\u0000\u0000"+
-		":\t\u0001\u0000\u0000\u0000;<\u0005\u0005\u0000\u0000<\u000b\u0001\u0000"+
-		"\u0000\u0000=B\u0003\u000e\u0007\u0000>?\u0005\u0011\u0000\u0000?A\u0003"+
-		"\u000e\u0007\u0000@>\u0001\u0000\u0000\u0000AD\u0001\u0000\u0000\u0000"+
-		"B@\u0001\u0000\u0000\u0000BC\u0001\u0000\u0000\u0000C\r\u0001\u0000\u0000"+
-		"\u0000DB\u0001\u0000\u0000\u0000EF\u0005\u000e\u0000\u0000FG\u0005\u0010"+
-		"\u0000\u0000GH\u0005\u000f\u0000\u0000HI\u0003\u0010\b\u0000I\u000f\u0001"+
-		"\u0000\u0000\u0000JK\u0007\u0000\u0000\u0000K\u0011\u0001\u0000\u0000"+
-		"\u0000LM\u0005\u0004\u0000\u0000MR\u0003\u0014\n\u0000NO\u0005\u0011\u0000"+
-		"\u0000OQ\u0003\u0014\n\u0000PN\u0001\u0000\u0000\u0000QT\u0001\u0000\u0000"+
-		"\u0000RP\u0001\u0000\u0000\u0000RS\u0001\u0000\u0000\u0000S\u0013\u0001"+
-		"\u0000\u0000\u0000TR\u0001\u0000\u0000\u0000UV\u0005\u000e\u0000\u0000"+
-		"VW\u0005\u0012\u0000\u0000WX\u0005\u000e\u0000\u0000X\u0015\u0001\u0000"+
-		"\u0000\u0000\u0007\u001a!(-9BR";
+		"\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
+		"\u0001\u0004\u0001\u0004\u0004\u0004:\b\u0004\u000b\u0004\f\u0004;\u0001"+
+		"\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0005"+
+		"\u0006D\b\u0006\n\u0006\f\u0006G\t\u0006\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\t\u0001\t\u0001\t"+
+		"\u0001\t\u0005\tT\b\t\n\t\f\tW\t\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0000\u0000\u000b\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014"+
+		"\u0000\u0001\u0001\u0000\u000b\rX\u0000\u0016\u0001\u0000\u0000\u0000"+
+		"\u0002\u001f\u0001\u0000\u0000\u0000\u0004#\u0001\u0000\u0000\u0000\u0006"+
+		"3\u0001\u0000\u0000\u0000\b7\u0001\u0000\u0000\u0000\n=\u0001\u0000\u0000"+
+		"\u0000\f@\u0001\u0000\u0000\u0000\u000eH\u0001\u0000\u0000\u0000\u0010"+
+		"M\u0001\u0000\u0000\u0000\u0012O\u0001\u0000\u0000\u0000\u0014X\u0001"+
+		"\u0000\u0000\u0000\u0016\u0017\u0003\u0002\u0001\u0000\u0017\u0018\u0003"+
+		"\u0006\u0003\u0000\u0018\u001a\u0003\b\u0004\u0000\u0019\u001b\u0003\u0012"+
+		"\t\u0000\u001a\u0019\u0001\u0000\u0000\u0000\u001a\u001b\u0001\u0000\u0000"+
+		"\u0000\u001b\u001c\u0001\u0000\u0000\u0000\u001c\u001d\u0005\u0000\u0000"+
+		"\u0001\u001d\u0001\u0001\u0000\u0000\u0000\u001e \u0003\u0004\u0002\u0000"+
+		"\u001f\u001e\u0001\u0000\u0000\u0000 !\u0001\u0000\u0000\u0000!\u001f"+
+		"\u0001\u0000\u0000\u0000!\"\u0001\u0000\u0000\u0000\"\u0003\u0001\u0000"+
+		"\u0000\u0000#$\u0005\u0006\u0000\u0000$(\u0005\u000e\u0000\u0000%&\u0005"+
+		"\t\u0000\u0000&\'\u0005\u000f\u0000\u0000\')\u0005\u0001\u0000\u0000("+
+		"%\u0001\u0000\u0000\u0000()\u0001\u0000\u0000\u0000)-\u0001\u0000\u0000"+
+		"\u0000*+\u0005\n\u0000\u0000+,\u0005\u000f\u0000\u0000,.\u0005\u0002\u0000"+
+		"\u0000-*\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000./\u0001\u0000"+
+		"\u0000\u0000/0\u0005\u0007\u0000\u000001\u0005\u0010\u0000\u000012\u0003"+
+		"\f\u0006\u00002\u0005\u0001\u0000\u0000\u000034\u0005\b\u0000\u000045"+
+		"\u0005\u0010\u0000\u000056\u0003\f\u0006\u00006\u0007\u0001\u0000\u0000"+
+		"\u000079\u0005\u0003\u0000\u00008:\u0003\n\u0005\u000098\u0001\u0000\u0000"+
+		"\u0000:;\u0001\u0000\u0000\u0000;9\u0001\u0000\u0000\u0000;<\u0001\u0000"+
+		"\u0000\u0000<\t\u0001\u0000\u0000\u0000=>\u0005\u0004\u0000\u0000>?\u0005"+
+		"\u0013\u0000\u0000?\u000b\u0001\u0000\u0000\u0000@E\u0003\u000e\u0007"+
+		"\u0000AB\u0005\u0011\u0000\u0000BD\u0003\u000e\u0007\u0000CA\u0001\u0000"+
+		"\u0000\u0000DG\u0001\u0000\u0000\u0000EC\u0001\u0000\u0000\u0000EF\u0001"+
+		"\u0000\u0000\u0000F\r\u0001\u0000\u0000\u0000GE\u0001\u0000\u0000\u0000"+
+		"HI\u0005\u000e\u0000\u0000IJ\u0005\u0010\u0000\u0000JK\u0005\u000f\u0000"+
+		"\u0000KL\u0003\u0010\b\u0000L\u000f\u0001\u0000\u0000\u0000MN\u0007\u0000"+
+		"\u0000\u0000N\u0011\u0001\u0000\u0000\u0000OP\u0005\u0005\u0000\u0000"+
+		"PU\u0003\u0014\n\u0000QR\u0005\u0011\u0000\u0000RT\u0003\u0014\n\u0000"+
+		"SQ\u0001\u0000\u0000\u0000TW\u0001\u0000\u0000\u0000US\u0001\u0000\u0000"+
+		"\u0000UV\u0001\u0000\u0000\u0000V\u0013\u0001\u0000\u0000\u0000WU\u0001"+
+		"\u0000\u0000\u0000XY\u0005\u000e\u0000\u0000YZ\u0005\u0012\u0000\u0000"+
+		"Z[\u0005\u000e\u0000\u0000[\u0015\u0001\u0000\u0000\u0000\u0007\u001a"+
+		"!(-;EU";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

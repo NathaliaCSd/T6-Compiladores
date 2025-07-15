@@ -17,27 +17,25 @@ declaracoes_receitas
 
 // Define a estrutura de uma declaração de receita.
 declaracao_receita
-    : RECEITA ID 
+    : RECEITA NOME 
      (RENDIMENTO NUMERO 'porcoes')?
      (TEMPO NUMERO 'min')?
-     REQUER lista_ingredientes
+     REQUER DOIS_PONTOS lista_ingredientes
     ;
 
 // Define a estrutura da declaração dos ingredientes disponíveis.
 // Ex: "ingredientes tomate:2 un, batata:2 un"
 declaracao_ingredientes
-    : INGREDIENTES lista_ingredientes
+    : INGREDIENTES DOIS_PONTOS lista_ingredientes
     ;
 
 declaracao_passos
     : 'passos:' passo+
     ;
 
-PASSO : '-';
-
 passo
-    : PASSO
-    ;
+  : '-' TEXT
+  ;
 
 // Define uma lista de um ou mais ingredientes, separados por vírgula.
 lista_ingredientes
@@ -47,7 +45,7 @@ lista_ingredientes
 // Define um único ingrediente com nome, quantidade e unidade.
 // Ex: "alho:3 un"
 ingrediente
-    : ID DOIS_PONTOS NUMERO unidade
+    : NOME DOIS_PONTOS NUMERO unidade
     ;
 
 // Agrupa as possíveis unidades de medida.
@@ -62,8 +60,8 @@ substituicoes
     ;
 
 substituicao
-    : ID EQUAL ID
-    ;
+  : NOME '=' NOME
+  ;
 
 // Palavras-chave da linguagem
 RECEITA         : 'receita';
@@ -79,11 +77,12 @@ G               : 'g';
 ML              : 'ml';
 
 // Componentes básicos
-ID            : [a-z_]+;      // Nomes de receitas e ingredientes (letras minúsculas e underscore)
+NOME            : [a-z_]+;      // Nomes de receitas e ingredientes (letras minúsculas e underscore)
 NUMERO          : [0-9]+;       // Quantidades inteiras
 DOIS_PONTOS     : ':';
 VIRGULA         : ',';
 EQUAL           : '=';
+TEXT:  ~[\r\n]+ ;
 
 // Ignora espaços em branco, tabulações e quebras de linha entre os tokens.
 WS              : [ \t\r\n]+ -> skip;

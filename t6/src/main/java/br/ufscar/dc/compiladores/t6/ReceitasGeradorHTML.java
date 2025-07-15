@@ -38,7 +38,7 @@ public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
     @Override
     public Void visitDeclaracao_ingredientes(ReceitasParser.Declaracao_ingredientesContext ctx) {
         for (var ing : ctx.lista_ingredientes().ingrediente()) {
-            String nome = ing.ID().getText();
+            String nome = ing.NOME().getText();
             int qtd = Integer.parseInt(ing.NUMERO().getText());
             inventario.put(nome, qtd);
         }
@@ -57,10 +57,10 @@ public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
 
     /** Checa se uma receita pode ser feita e registra faltas */
     private void checarReceita(ReceitasParser.Declaracao_receitaContext ctx) {
-        String nomeRec = ctx.ID().getText();
+        String nomeRec = ctx.NOME().getText();
         List<String> faltam = new ArrayList<>();
         for (var req : ctx.lista_ingredientes().ingrediente()) {
-            String nomeIng = req.ID().getText();
+            String nomeIng = req.NOME().getText();
             int qtdReq = Integer.parseInt(req.NUMERO().getText());
             int qtdDisp = inventario.getOrDefault(nomeIng, 0);
             if (qtdDisp < qtdReq) {
