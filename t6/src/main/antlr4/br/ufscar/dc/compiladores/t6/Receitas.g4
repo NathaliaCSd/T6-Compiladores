@@ -34,7 +34,7 @@ declaracao_passos
     ;
 
 passo
-  : '-' TEXT
+  : PASSO
   ;
 
 // Define uma lista de um ou mais ingredientes, separados por vírgula.
@@ -82,7 +82,7 @@ NUMERO          : [0-9]+;       // Quantidades inteiras
 DOIS_PONTOS     : ':';
 VIRGULA         : ',';
 EQUAL           : '=';
-TEXT:  ~[\r\n]+ ;
+PASSO: '-' ~[\r\n]+ ;
 
 // Ignora espaços em branco, tabulações e quebras de linha entre os tokens.
 WS              : [ \t\r\n]+ -> skip;

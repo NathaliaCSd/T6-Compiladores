@@ -7,10 +7,10 @@ import java.util.*;
 
 /**
  * Gera um relatório HTML listando:
- *  - Ingredientes disponíveis
- *  - Receitas possíveis
- *  - Receitas não possíveis com faltantes
- *  - Passos de preparo
+ * - Ingredientes disponíveis
+ * - Receitas possíveis
+ * - Receitas não possíveis com faltantes
+ * - Passos de preparo
  */
 public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
 
@@ -48,8 +48,8 @@ public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
     @Override
     public Void visitDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx) {
         for (var passoCtx : ctx.passo()) {
-            // passoCtx.getText() inclui o '-' inicial
-            String texto = passoCtx.getText().substring(1).trim();
+            String textoComTraco = passoCtx.PASSO().getText(); // ex.: "-misture ovo..."
+            String texto = textoComTraco.substring(1).trim(); // "misture ovo..."
             passos.add(texto);
         }
         return null;
@@ -76,11 +76,13 @@ public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
 
     /** Constrói e escreve o conteúdo HTML */
     private void montarHTML() {
-        html.append("<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Relatório de Receitas</title>\n  <style>body{font-family:sans-serif;}h1{color:#2e6c80;}ul,ol{margin-left:20px;}li{margin-bottom:4px;}</style>\n</head>\n<body>\n");
+        html.append(
+                "<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Relatório de Receitas</title>\n  <style>body{font-family:sans-serif;}h1{color:#2e6c80;}ul,ol{margin-left:20px;}li{margin-bottom:4px;}</style>\n</head>\n<body>\n");
 
         // Ingredientes
         html.append("<h1>Inventário de Ingredientes</h1>\n<ul>\n");
-        inventario.forEach((nome, qtd) -> html.append("  <li>").append(nome).append(": ").append(qtd).append("</li>\n"));
+        inventario
+                .forEach((nome, qtd) -> html.append("  <li>").append(nome).append(": ").append(qtd).append("</li>\n"));
         html.append("</ul>\n");
 
         // Receitas possíveis
@@ -94,10 +96,10 @@ public class ReceitasGeradorHTML extends ReceitasBaseVisitor<Void> {
         html.append("<h1>Receitas Não Possíveis</h1>\n<ul>\n");
         for (var entry : insuficientes.entrySet()) {
             html.append("  <li>")
-                .append(entry.getKey())
-                .append(" (faltam: ")
-                .append(String.join(", ", entry.getValue()))
-                .append(")</li>\n");
+                    .append(entry.getKey())
+                    .append(" (faltam: ")
+                    .append(String.join(", ", entry.getValue()))
+                    .append(")</li>\n");
         }
         html.append("</ul>\n");
 
