@@ -65,30 +65,6 @@ public class ReceitasBaseListener implements ReceitasListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterPasso(ReceitasParser.PassoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitPasso(ReceitasParser.PassoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterLista_ingredientes(ReceitasParser.Lista_ingredientesContext ctx) { }
 	/**
 	 * {@inheritDoc}

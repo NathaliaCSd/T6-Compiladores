@@ -35,18 +35,6 @@ public interface ReceitasVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclaracao_ingredientes(ReceitasParser.Declaracao_ingredientesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReceitasParser#declaracao_passos}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReceitasParser#passo}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitPasso(ReceitasParser.PassoContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ReceitasParser#lista_ingredientes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

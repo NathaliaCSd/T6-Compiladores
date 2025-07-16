@@ -2,6 +2,7 @@ package br.ufscar.dc.compiladores.t6;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.antlr.v4.runtime.Token;
 
 
@@ -18,7 +19,7 @@ public Void visitPrograma(ReceitasParser.ProgramaContext ctx) {
     // 2) Ingredientes
     visitDeclaracao_ingredientes(ctx.declaracao_ingredientes());
     // 3) Passos
-    visitDeclaracao_passos(ctx.declaracao_passos());
+    //visitDeclaracao_passos(ctx.declaracao_passos());
     // 4) Substituições, se houver
     if (ctx.substituicoes() != null) {
         visitSubstituicoes(ctx.substituicoes());
@@ -113,7 +114,7 @@ public Void visitPrograma(ReceitasParser.ProgramaContext ctx) {
         }
         return null;
     }
-
+    /*
     @Override
     public Void visitDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx) {
         if (ctx.passo().isEmpty()) {
@@ -122,4 +123,5 @@ public Void visitPrograma(ReceitasParser.ProgramaContext ctx) {
         }
         return null;
     }
+    */
 }

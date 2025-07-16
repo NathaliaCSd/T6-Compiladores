@@ -5,7 +5,7 @@ grammar Receitas;
 programa
     : declaracoes_receitas
      declaracao_ingredientes 
-     declaracao_passos 
+     //declaracao_passos 
      ( substituicoes )?
      EOF
     ;
@@ -28,7 +28,7 @@ declaracao_receita
 declaracao_ingredientes
     : INGREDIENTES DOIS_PONTOS lista_ingredientes
     ;
-
+/* 
 declaracao_passos
     : 'passos:' passo+
     ;
@@ -36,7 +36,7 @@ declaracao_passos
 passo
   : PASSO
   ;
-
+*/
 // Define uma lista de um ou mais ingredientes, separados por vírgula.
 lista_ingredientes
     : ingrediente (VIRGULA ingrediente)*
