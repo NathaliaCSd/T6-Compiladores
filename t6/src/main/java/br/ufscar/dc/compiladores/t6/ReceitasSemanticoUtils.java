@@ -35,7 +35,7 @@ public class ReceitasSemanticoUtils {
     public static void adicionarErroSemantico(Token t, String mensagem) {
         int linha = t.getLine();
         int coluna = t.getCharPositionInLine();
-        errosSemanticos.add(String.format("Linha %d:%d - %s", linha, coluna, mensagem));
+        errosSemanticos.add(String.format("Linha %d:%d - %s\n", linha, coluna, mensagem));
     }
 
     /**

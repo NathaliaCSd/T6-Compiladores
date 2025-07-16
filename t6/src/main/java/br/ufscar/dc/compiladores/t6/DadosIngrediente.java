@@ -3,13 +3,13 @@ public class DadosIngrediente {
     private int quantidade;
     private String unidadeMedida;
 
-    public DadosIngrediente(int quantidade, String unidadeMedida) {
+    public DadosIngrediente(double quantidade, String unidadeMedida) {
         this.quantidade = quantidade;
         this.unidadeMedida = unidadeMedida;
     }
 
     // Métodos "getters" para acessar os valores
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 

@@ -3,8 +3,8 @@ grammar Receitas;
 // A regra principal que representa todo o arquivo de entrada.
 // Espera uma declaração de receita seguida por uma de ingredientes.
 programa
-    : declaracoes_receitas
-     declaracao_ingredientes 
+    : declaracao_ingredientes 
+    declaracoes_receitas 
      //declaracao_passos 
      ( substituicoes )?
      EOF
@@ -53,6 +53,8 @@ unidade
     : UN
     | G
     | ML
+    | L
+    | KG
     ;
 
 substituicoes
@@ -75,6 +77,8 @@ TEMPO           : 'tempo';
 UN              : 'un';
 G               : 'g';
 ML              : 'ml';
+KG              : 'kg';
+L               : 'l' ;
 
 // Componentes básicos
 NOME            : [a-z_]+;      // Nomes de receitas e ingredientes (letras minúsculas e underscore)
