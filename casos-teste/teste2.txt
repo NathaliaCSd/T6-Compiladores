@@ -1,8 +1,9 @@
+$receita disponivel
+ingredientes: alho:2 un, tomate:1 un, ovo:3 un, sal:5 g
+
 receita curry rendimento 4 porcoes tempo 120 min requer: caldo_frango:1000 ml,frango:500 g, curry_em_po: 50 g,gengibre:3 g,alho:3 un, batata:2 un, cenoura:1 un, cebola:1 un, tomate:1 un, pimenta :1g, sal:1 g 
 receita bruschetta requer: tomate:2 un, alho:1 um
 receita ovo_frito requer: ovo:1 un
 
-ingredientes: alho:2 un, tomate:1 un, ovo:3 un, sal:5 g
 
-passos:
-- passos do curry
+

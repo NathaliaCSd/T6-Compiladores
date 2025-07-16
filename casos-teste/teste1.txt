@@ -1,6 +1,10 @@
-ingredientes: alho:2 un, tomate:1 un, ovo:3 un, sal:5 g, leite: 500 ml
+$erro lexio na declaração de alho com um ao invés de un
+ingredientes: alho:2 un, tomate:1 un, ovo:3 un, sal:5 g
 
-receita omelete rendimento 2 porcoes tempo 10 min requer: ovo:2 ml, sal:1 ml
-receita bruschetta requer: tomate:2 ml, alho: 1 ml
+receita omelete rendimento 2 porcoes tempo 10 min requer: ovo:2 un, sal:1 g
+receita bruschetta requer: tomate:2 un, alho:1 um
+
+
+
 
 
