@@ -7,6 +7,7 @@ br/ufscar/dc/compiladores/t6/ReceitasSemanticoUtils.class
 br/ufscar/dc/compiladores/t6/Principal$2.class
 br/ufscar/dc/compiladores/t6/DadosIngrediente.class
 br/ufscar/dc/compiladores/t6/ReceitasParser$Declaracao_receitaContext.class
+br/ufscar/dc/compiladores/t6/Unidade.class
 br/ufscar/dc/compiladores/t6/ReceitasSemantico$DimensaoUnidade.class
 br/ufscar/dc/compiladores/t6/TabelaDeSimbolos$TipoReceitas.class
 br/ufscar/dc/compiladores/t6/ReceitasParser.class
