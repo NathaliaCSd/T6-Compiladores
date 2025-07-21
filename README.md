@@ -1,6 +1,8 @@
 # T6-Compiladores
 Repositório da matéria de Construção de Compiladores com o professor Daniel Lucredio na UFSCar de São Carlos, referente ao ultimo trabalho da disciplina para criação de uma linguagem de programação própria. Como refêrencia usamos o seguinte trabalho: [https://github.com/linneu1997/Compiladores-T6/tree/main](https://github.com/linneu1997/Compiladores-T6/tree/main)
 
+[Vídeo explicativo](https://www.loom.com/share/6e410b76940e4768a690f1c83c21e115?sid=ecef400a-7fa5-40b2-8e91-558ae290504d)
+
 
 Alunos:
 
