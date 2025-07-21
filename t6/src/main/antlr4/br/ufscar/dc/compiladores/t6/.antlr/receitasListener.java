@@ -47,26 +47,6 @@ public interface ReceitasListener extends ParseTreeListener {
 	 */
 	void exitDeclaracao_ingredientes(ReceitasParser.Declaracao_ingredientesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReceitasParser#declaracao_passos}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReceitasParser#declaracao_passos}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclaracao_passos(ReceitasParser.Declaracao_passosContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReceitasParser#passo}.
-	 * @param ctx the parse tree
-	 */
-	void enterPasso(ReceitasParser.PassoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReceitasParser#passo}.
-	 * @param ctx the parse tree
-	 */
-	void exitPasso(ReceitasParser.PassoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ReceitasParser#lista_ingredientes}.
 	 * @param ctx the parse tree
 	 */

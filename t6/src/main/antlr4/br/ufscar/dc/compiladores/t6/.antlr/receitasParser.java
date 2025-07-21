@@ -17,8 +17,8 @@ public class ReceitasParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, RECEITA=4, REQUER=5, INGREDIENTES=6, RENDIMENTO=7, 
-		TEMPO=8, UN=9, G=10, ML=11, NOME=12, NUMERO=13, DOIS_PONTOS=14, VIRGULA=15, 
-		EQUAL=16, PASSO=17, WS=18, COMENTARIO=19;
+		TEMPO=8, UN=9, G=10, ML=11, KG=12, L=13, NOME=14, NUMERO=15, DOIS_PONTOS=16, 
+		VIRGULA=17, EQUAL=18, PASSO=19, WS=20, COMENTARIO=21;
 	public static final int
 		RULE_programa = 0, RULE_declaracoes_receitas = 1, RULE_declaracao_receita = 2, 
 		RULE_declaracao_ingredientes = 3, RULE_lista_ingredientes = 4, RULE_ingrediente = 5, 
@@ -34,16 +34,16 @@ public class ReceitasParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'porcoes'", "'min'", "'substituicoes:'", "'receita'", "'requer'", 
-			"'ingredientes'", "'rendimento'", "'tempo'", "'un'", "'g'", "'ml'", null, 
-			null, "':'", "','", "'='"
+			"'ingredientes'", "'rendimento'", "'tempo'", "'un'", "'g'", "'ml'", "'kg'", 
+			"'l'", null, null, "':'", "','", "'='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, "RECEITA", "REQUER", "INGREDIENTES", "RENDIMENTO", 
-			"TEMPO", "UN", "G", "ML", "NOME", "NUMERO", "DOIS_PONTOS", "VIRGULA", 
-			"EQUAL", "PASSO", "WS", "COMENTARIO"
+			"TEMPO", "UN", "G", "ML", "KG", "L", "NOME", "NUMERO", "DOIS_PONTOS", 
+			"VIRGULA", "EQUAL", "PASSO", "WS", "COMENTARIO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -99,11 +99,11 @@ public class ReceitasParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramaContext extends ParserRuleContext {
-		public Declaracoes_receitasContext declaracoes_receitas() {
-			return getRuleContext(Declaracoes_receitasContext.class,0);
-		}
 		public Declaracao_ingredientesContext declaracao_ingredientes() {
 			return getRuleContext(Declaracao_ingredientesContext.class,0);
+		}
+		public Declaracoes_receitasContext declaracoes_receitas() {
+			return getRuleContext(Declaracoes_receitasContext.class,0);
 		}
 		public TerminalNode EOF() { return getToken(ReceitasParser.EOF, 0); }
 		public SubstituicoesContext substituicoes() {
@@ -113,6 +113,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_programa; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterPrograma(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitPrograma(this);
+		}
 	}
 
 	public final ProgramaContext programa() throws RecognitionException {
@@ -123,9 +131,9 @@ public class ReceitasParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(18);
-			declaracoes_receitas();
-			setState(19);
 			declaracao_ingredientes();
+			setState(19);
+			declaracoes_receitas();
 			setState(21);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -163,6 +171,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaracoes_receitas; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterDeclaracoes_receitas(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitDeclaracoes_receitas(this);
+		}
 	}
 
 	public final Declaracoes_receitasContext declaracoes_receitas() throws RecognitionException {
@@ -218,6 +234,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaracao_receita; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterDeclaracao_receita(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitDeclaracao_receita(this);
+		}
 	}
 
 	public final Declaracao_receitaContext declaracao_receita() throws RecognitionException {
@@ -289,6 +313,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declaracao_ingredientes; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterDeclaracao_ingredientes(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitDeclaracao_ingredientes(this);
+		}
 	}
 
 	public final Declaracao_ingredientesContext declaracao_ingredientes() throws RecognitionException {
@@ -332,6 +364,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_lista_ingredientes; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterLista_ingredientes(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitLista_ingredientes(this);
+		}
 	}
 
 	public final Lista_ingredientesContext lista_ingredientes() throws RecognitionException {
@@ -384,6 +424,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ingrediente; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterIngrediente(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitIngrediente(this);
+		}
 	}
 
 	public final IngredienteContext ingrediente() throws RecognitionException {
@@ -418,10 +466,20 @@ public class ReceitasParser extends Parser {
 		public TerminalNode UN() { return getToken(ReceitasParser.UN, 0); }
 		public TerminalNode G() { return getToken(ReceitasParser.G, 0); }
 		public TerminalNode ML() { return getToken(ReceitasParser.ML, 0); }
+		public TerminalNode L() { return getToken(ReceitasParser.L, 0); }
+		public TerminalNode KG() { return getToken(ReceitasParser.KG, 0); }
 		public UnidadeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unidade; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterUnidade(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitUnidade(this);
+		}
 	}
 
 	public final UnidadeContext unidade() throws RecognitionException {
@@ -433,7 +491,7 @@ public class ReceitasParser extends Parser {
 			{
 			setState(63);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 3584L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 15872L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -470,6 +528,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_substituicoes; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterSubstituicoes(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitSubstituicoes(this);
+		}
 	}
 
 	public final SubstituicoesContext substituicoes() throws RecognitionException {
@@ -523,6 +589,14 @@ public class ReceitasParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_substituicao; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).enterSubstituicao(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ReceitasListener ) ((ReceitasListener)listener).exitSubstituicao(this);
+		}
 	}
 
 	public final SubstituicaoContext substituicao() throws RecognitionException {
@@ -551,7 +625,7 @@ public class ReceitasParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0013O\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u0015O\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0001\u0000\u0001\u0000\u0001\u0000\u0003\u0000\u0016\b\u0000"+
@@ -564,37 +638,38 @@ public class ReceitasParser extends Parser {
 		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006\u0001\u0006\u0001\u0007"+
 		"\u0001\u0007\u0001\u0007\u0001\u0007\u0005\u0007F\b\u0007\n\u0007\f\u0007"+
 		"I\t\u0007\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0000\u0000\t\u0000"+
-		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000\u0001\u0001\u0000\t\u000bK"+
-		"\u0000\u0012\u0001\u0000\u0000\u0000\u0002\u001a\u0001\u0000\u0000\u0000"+
-		"\u0004\u001e\u0001\u0000\u0000\u0000\u0006.\u0001\u0000\u0000\u0000\b"+
-		"2\u0001\u0000\u0000\u0000\n:\u0001\u0000\u0000\u0000\f?\u0001\u0000\u0000"+
-		"\u0000\u000eA\u0001\u0000\u0000\u0000\u0010J\u0001\u0000\u0000\u0000\u0012"+
-		"\u0013\u0003\u0002\u0001\u0000\u0013\u0015\u0003\u0006\u0003\u0000\u0014"+
-		"\u0016\u0003\u000e\u0007\u0000\u0015\u0014\u0001\u0000\u0000\u0000\u0015"+
-		"\u0016\u0001\u0000\u0000\u0000\u0016\u0017\u0001\u0000\u0000\u0000\u0017"+
-		"\u0018\u0005\u0000\u0000\u0001\u0018\u0001\u0001\u0000\u0000\u0000\u0019"+
-		"\u001b\u0003\u0004\u0002\u0000\u001a\u0019\u0001\u0000\u0000\u0000\u001b"+
-		"\u001c\u0001\u0000\u0000\u0000\u001c\u001a\u0001\u0000\u0000\u0000\u001c"+
-		"\u001d\u0001\u0000\u0000\u0000\u001d\u0003\u0001\u0000\u0000\u0000\u001e"+
-		"\u001f\u0005\u0004\u0000\u0000\u001f#\u0005\f\u0000\u0000 !\u0005\u0007"+
-		"\u0000\u0000!\"\u0005\r\u0000\u0000\"$\u0005\u0001\u0000\u0000# \u0001"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0000\u0001\u0001\u0000\t\rK\u0000"+
+		"\u0012\u0001\u0000\u0000\u0000\u0002\u001a\u0001\u0000\u0000\u0000\u0004"+
+		"\u001e\u0001\u0000\u0000\u0000\u0006.\u0001\u0000\u0000\u0000\b2\u0001"+
+		"\u0000\u0000\u0000\n:\u0001\u0000\u0000\u0000\f?\u0001\u0000\u0000\u0000"+
+		"\u000eA\u0001\u0000\u0000\u0000\u0010J\u0001\u0000\u0000\u0000\u0012\u0013"+
+		"\u0003\u0006\u0003\u0000\u0013\u0015\u0003\u0002\u0001\u0000\u0014\u0016"+
+		"\u0003\u000e\u0007\u0000\u0015\u0014\u0001\u0000\u0000\u0000\u0015\u0016"+
+		"\u0001\u0000\u0000\u0000\u0016\u0017\u0001\u0000\u0000\u0000\u0017\u0018"+
+		"\u0005\u0000\u0000\u0001\u0018\u0001\u0001\u0000\u0000\u0000\u0019\u001b"+
+		"\u0003\u0004\u0002\u0000\u001a\u0019\u0001\u0000\u0000\u0000\u001b\u001c"+
+		"\u0001\u0000\u0000\u0000\u001c\u001a\u0001\u0000\u0000\u0000\u001c\u001d"+
+		"\u0001\u0000\u0000\u0000\u001d\u0003\u0001\u0000\u0000\u0000\u001e\u001f"+
+		"\u0005\u0004\u0000\u0000\u001f#\u0005\u000e\u0000\u0000 !\u0005\u0007"+
+		"\u0000\u0000!\"\u0005\u000f\u0000\u0000\"$\u0005\u0001\u0000\u0000# \u0001"+
 		"\u0000\u0000\u0000#$\u0001\u0000\u0000\u0000$(\u0001\u0000\u0000\u0000"+
-		"%&\u0005\b\u0000\u0000&\'\u0005\r\u0000\u0000\')\u0005\u0002\u0000\u0000"+
-		"(%\u0001\u0000\u0000\u0000()\u0001\u0000\u0000\u0000)*\u0001\u0000\u0000"+
-		"\u0000*+\u0005\u0005\u0000\u0000+,\u0005\u000e\u0000\u0000,-\u0003\b\u0004"+
-		"\u0000-\u0005\u0001\u0000\u0000\u0000./\u0005\u0006\u0000\u0000/0\u0005"+
-		"\u000e\u0000\u000001\u0003\b\u0004\u00001\u0007\u0001\u0000\u0000\u0000"+
-		"27\u0003\n\u0005\u000034\u0005\u000f\u0000\u000046\u0003\n\u0005\u0000"+
-		"53\u0001\u0000\u0000\u000069\u0001\u0000\u0000\u000075\u0001\u0000\u0000"+
-		"\u000078\u0001\u0000\u0000\u00008\t\u0001\u0000\u0000\u000097\u0001\u0000"+
-		"\u0000\u0000:;\u0005\f\u0000\u0000;<\u0005\u000e\u0000\u0000<=\u0005\r"+
-		"\u0000\u0000=>\u0003\f\u0006\u0000>\u000b\u0001\u0000\u0000\u0000?@\u0007"+
-		"\u0000\u0000\u0000@\r\u0001\u0000\u0000\u0000AB\u0005\u0003\u0000\u0000"+
-		"BG\u0003\u0010\b\u0000CD\u0005\u000f\u0000\u0000DF\u0003\u0010\b\u0000"+
-		"EC\u0001\u0000\u0000\u0000FI\u0001\u0000\u0000\u0000GE\u0001\u0000\u0000"+
-		"\u0000GH\u0001\u0000\u0000\u0000H\u000f\u0001\u0000\u0000\u0000IG\u0001"+
-		"\u0000\u0000\u0000JK\u0005\f\u0000\u0000KL\u0005\u0010\u0000\u0000LM\u0005"+
-		"\f\u0000\u0000M\u0011\u0001\u0000\u0000\u0000\u0006\u0015\u001c#(7G";
+		"%&\u0005\b\u0000\u0000&\'\u0005\u000f\u0000\u0000\')\u0005\u0002\u0000"+
+		"\u0000(%\u0001\u0000\u0000\u0000()\u0001\u0000\u0000\u0000)*\u0001\u0000"+
+		"\u0000\u0000*+\u0005\u0005\u0000\u0000+,\u0005\u0010\u0000\u0000,-\u0003"+
+		"\b\u0004\u0000-\u0005\u0001\u0000\u0000\u0000./\u0005\u0006\u0000\u0000"+
+		"/0\u0005\u0010\u0000\u000001\u0003\b\u0004\u00001\u0007\u0001\u0000\u0000"+
+		"\u000027\u0003\n\u0005\u000034\u0005\u0011\u0000\u000046\u0003\n\u0005"+
+		"\u000053\u0001\u0000\u0000\u000069\u0001\u0000\u0000\u000075\u0001\u0000"+
+		"\u0000\u000078\u0001\u0000\u0000\u00008\t\u0001\u0000\u0000\u000097\u0001"+
+		"\u0000\u0000\u0000:;\u0005\u000e\u0000\u0000;<\u0005\u0010\u0000\u0000"+
+		"<=\u0005\u000f\u0000\u0000=>\u0003\f\u0006\u0000>\u000b\u0001\u0000\u0000"+
+		"\u0000?@\u0007\u0000\u0000\u0000@\r\u0001\u0000\u0000\u0000AB\u0005\u0003"+
+		"\u0000\u0000BG\u0003\u0010\b\u0000CD\u0005\u0011\u0000\u0000DF\u0003\u0010"+
+		"\b\u0000EC\u0001\u0000\u0000\u0000FI\u0001\u0000\u0000\u0000GE\u0001\u0000"+
+		"\u0000\u0000GH\u0001\u0000\u0000\u0000H\u000f\u0001\u0000\u0000\u0000"+
+		"IG\u0001\u0000\u0000\u0000JK\u0005\u000e\u0000\u0000KL\u0005\u0012\u0000"+
+		"\u0000LM\u0005\u000e\u0000\u0000M\u0011\u0001\u0000\u0000\u0000\u0006"+
+		"\u0015\u001c#(7G";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
